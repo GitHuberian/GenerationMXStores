@@ -37,5 +37,6 @@ export default class FavoriteStore {
         
         // Restoring favorite from the localStorage
         if (storage) this.favorite = storage;
+        console.log(this.favorite)
     }
 }

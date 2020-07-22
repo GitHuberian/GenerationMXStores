@@ -12,13 +12,13 @@ export default class StoredLocations extends Component {
         <ul>
             {
                 this.props.newFavorite.map(current => 
-                    <li>
+                    <li key={current.name}>
                         <h3>{current.name}</h3>
                         <p>{current.address}</p>
+                        
                     </li>
                     )
             }
-            
         </ul>
     </div>
     );

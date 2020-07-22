@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Global from '../Globals/Global';
-import FavoriteStore from '../Models/FavoriteStore';
 //This is my main map component
 
 export default class Map extends Component {
@@ -29,9 +28,8 @@ export default class Map extends Component {
 
         this.geocodeAddress(geocoder, map);
     }
-
+ 
     geocodeAddress(geocoder, map) {
-        const Favs = new FavoriteStore();
 
         let portionStoresArr = this.state.addressArr.slice(0, 10);
 
@@ -40,8 +38,8 @@ export default class Map extends Component {
             window.setTimeout(function () {
                 marker.setAnimation(null);
             }, 1000);
-            if(!Favs.isStored(name)){
-                this.props.storedLocation(Favs.addFavorite(name, address));
+            if(!this.props.Favs.isStored(name)){
+                this.props.storedLocation(this.props.Favs.addFavorite(name, address));
             }
         };
 

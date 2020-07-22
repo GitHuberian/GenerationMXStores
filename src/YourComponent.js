@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Toolbar from './Toolbar/Toolbar';
 import StoredLocations from './StoredLocations/StoredLocations';
+import FavoriteStore from './Models/FavoriteStore';
 import Map from './Map/Map';
 /*
 * Use this component as a launching-pad to build your functionality.
@@ -12,7 +13,8 @@ export default class YourComponent extends Component {
     super(props);
     this.state = {
       activeList: false,
-      store:[]
+      store:[],
+      favObject:{}
     }
     this.openList = this.openList.bind(this);
   }
@@ -24,7 +26,6 @@ export default class YourComponent extends Component {
   }
 
   storedLocation = (favorites) =>{
-
     const { store } = { ...this.state };
     const currentState = store;
     currentState.push(favorites);
@@ -33,7 +34,15 @@ export default class YourComponent extends Component {
       store: currentState 
     });
     
-    console.log(this.state.store);
+  }
+
+  componentWillMount(){
+    const Favs = new FavoriteStore();
+    Favs.readStorage();
+    this.setState({
+      favObject:Favs,
+      store: Favs.favorite
+    });
   }
 
   render() {
@@ -43,8 +52,8 @@ export default class YourComponent extends Component {
       <p>Show me the map, please!</p>
       <div className='main'>
         <Toolbar openList={this.openList} active={this.state.activeList}></Toolbar>
-        <Map storedLocation={this.storedLocation}></Map>
-        <StoredLocations activeList={this.state.activeList} newFavorite={this.state.store}></StoredLocations>
+        <Map storedLocation={this.storedLocation} Favs={this.state.favObject}></Map>
+        <StoredLocations activeList={this.state.activeList} newFavorite={[...new Set(this.state.store)]}></StoredLocations>
       </div>
       </div>
     );
