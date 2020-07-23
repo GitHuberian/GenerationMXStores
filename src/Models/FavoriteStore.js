@@ -36,7 +36,6 @@ export default class FavoriteStore {
         const storage = JSON.parse(localStorage.getItem('favorite'));
         
         // Restoring favorite from the localStorage
-        if (storage) this.favorite = storage;
-        console.log(this.favorite)
+        if (storage) this.favorite = [...new Set(storage)];
     }
 }

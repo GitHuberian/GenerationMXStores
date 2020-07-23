@@ -27,6 +27,7 @@
     top: 0;
     z-index: 1;
     border-right: 1px solid #073861;
+    border-left: 1px solid red;
 }
 
 .main::after {
@@ -38,6 +39,7 @@
     right: -1px;
     top: 0;
     border-left: 1px solid #073861;
+    border-right: 1px solid red;
 }
 
 .star {
@@ -102,6 +104,9 @@
     right: -400px;
     width: 400px;
     height: 800px;
+    -webkit-box-shadow: -1px 0px 5px -1px rgba(80, 80, 80, 1);
+    -moz-box-shadow: -1px 0px 5px -1px rgba(80, 80, 80, 1);
+    box-shadow: -1px 0px 5px -1px rgba(80, 80, 80, 1);
     background-color: white;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -126,10 +131,10 @@
 }
 
 .stored_locations_list ul li{
-   font-size: 0.875rem;
-   transition: all 0.2s ease;
-   margin: 0 20px;
-   padding: 0 10px;
+    font-size: 0.75rem;
+    transition: all 0.2s ease;
+    margin: 0 25px 0 8px;
+    padding: 0 10px;
 }
 
 .stored_locations_list ul li:hover {

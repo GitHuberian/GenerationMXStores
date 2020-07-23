@@ -7,7 +7,8 @@ export default class Map extends Component {
         super(props);
         this.state = {
             addressArr:[],
-            userFavs:[]
+            userFavs:[],
+            set:0
         }
         this.initMap = this.initMap.bind(this);
         this.geocodeAddress = this.geocodeAddress.bind(this);
@@ -16,7 +17,7 @@ export default class Map extends Component {
 
     initMap() {
         let geocoder = new window.google.maps.Geocoder();
-
+        let storesLenght = Math.floor(this.state.addressArr.length / 10);
         const map = new window.google.maps.Map(document.getElementById("map"), {
             center: {
                 lat: 19.432608,
@@ -26,47 +27,56 @@ export default class Map extends Component {
             styles: Global.MAP_STYLES
         });
 
-        this.geocodeAddress(geocoder, map);
+        this.geocodeAddress(geocoder, map, storesLenght);
     }
  
-    geocodeAddress(geocoder, map) {
+    geocodeAddress(geocoder, map, storesLenght) {
 
-        let portionStoresArr = this.state.addressArr.slice(0, 10);
+       const addFav = (marker, name, address) => {
+           marker.setIcon(Global.MARKER_IMG);
+           marker.setAnimation(google.maps.Animation.BOUNCE);
+           window.setTimeout(function () {
+               marker.setAnimation(null);
+           }, 1000);
+           if (!this.props.Favs.isStored(name)) {
+               this.props.storedLocation(this.props.Favs.addFavorite(name, address));
+           }
+       };
 
-        const addFav = (marker, name, address) =>{
-            marker.setAnimation(window.google.maps.Animation.BOUNCE);
-            window.setTimeout(function () {
-                marker.setAnimation(null);
-            }, 1000);
-            if(!this.props.Favs.isStored(name)){
-                this.props.storedLocation(this.props.Favs.addFavorite(name, address));
-            }
-        };
-
-        portionStoresArr.map(current => {
-            geocoder.geocode({
-                'address': current.Address
-            }, function (results, status) {
-                if (status == 'OK') {
-                    let marker = new window.google.maps.Marker({
-                        position: results[0].geometry.location,
-                        map: map,
-                        title:current.Name,
-                        icon: Global.MARKER_IMG
-                    });
-                    marker.addListener("click", function () {
-                        addFav(marker, current.Name, current.Address);
-                    });
-                } else if (status === 'OVER_QUERY_LIMIT') {
-                    setTimeout(function () {
-                        console.log('Over query limit')
-                        this.geocodeAddress(geocoder, map);
-                    }, 300);
-                } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
-                }
+       const addMarker = (set) =>{
+            let portionStoresArr = this.state.addressArr.slice(set-10, set);
+            portionStoresArr.map(current => {
+                geocoder.geocode({
+                    'address': current.Address
+                }, function (results, status) {
+                    if (status == 'OK') {
+                        let marker = new window.google.maps.Marker({
+                            position: results[0].geometry.location,
+                            map: map,
+                            title: current.Name,
+                            icon: Global.MARKER_IMG_LIGHT
+                        });
+                        marker.addListener("click", function () {
+                            addFav(marker, current.Name, current.Address);
+                        });
+                    } else if (status === 'OVER_QUERY_LIMIT') {
+                        setTimeout(function () {
+                            console.log('Over query limit')
+                            geocodeAddress(geocoder, map, set);
+                        }, 2000);
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
             });
-        });
+       }
+
+       (function delayingInsert(i) {
+           setTimeout(function () {
+               addMarker(i*10);
+               if (--i) delayingInsert(i);
+           }, 3000)
+       })(storesLenght);
 
     }
 
