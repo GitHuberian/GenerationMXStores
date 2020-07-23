@@ -22,6 +22,7 @@ export default class YourComponent extends Component {
   }
 
   openList = (active, favorite) =>{
+    //updating states for opening the list component
     this.setState({
       activeList: active,
       favorite: favorite
@@ -33,13 +34,17 @@ export default class YourComponent extends Component {
     const currentState = stores;
     currentState.push(favorites);
 
+    //Updating the stores added to favorites
     this.setState({ 
       stores: currentState 
     });
   }
 
   componentWillMount(){
+    //Initializing FavoriteStore object
     const Favs = new FavoriteStore();
+
+    //Getting favorites from local storage
     Favs.readStorage();
     this.setState({
       favObject:Favs,

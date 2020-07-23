@@ -12,20 +12,8 @@ export default class FavoriteStore {
         return favorite;
     }
 
-    deleteFavorite(name) {
-        const index = this.favorite.findIndex(el => el.name === name);
-        this.favorite.splice(index, 1);
-
-        // Perist data in localStorage
-        this.persistData();
-    }
-
     isStored(name) {
         return this.favorite.findIndex(el => el.name === name) !== -1;
-    }
-
-    getNumfavorite() {
-        return this.favorite.length;
     }
 
     persistData() {

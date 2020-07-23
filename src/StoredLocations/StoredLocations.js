@@ -15,9 +15,7 @@ export default class StoredLocations extends Component {
                     <li key={index} className={this.props.clicked === current.name ? 'set_highlight':''}>
                         <h3>{current.name}</h3>
                         <p>{current.address}</p>
-                        
-                    </li>
-                    )
+                    </li>)
             }
         </ul>
     </div>

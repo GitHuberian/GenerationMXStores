@@ -31,6 +31,7 @@ export default class Map extends Component {
  
     geocodeAddress(geocoder, map, storesLenght){
 
+        //Adding marker/store to the favorites list
        const addFav = (marker, name, address) => {
            this.props.openList(true, name);
            marker.setIcon(Global.MARKER_IMG);
@@ -43,6 +44,7 @@ export default class Map extends Component {
            }
        };
 
+       //Adding set of markers/stores to the map (10)
        const addMarker = (set) =>{
             let portionStoresArr = this.state.addressArr.slice(set-10, set);
             portionStoresArr.map(current => {
@@ -62,7 +64,7 @@ export default class Map extends Component {
                     } else if (status === 'OVER_QUERY_LIMIT') {
                         setTimeout(function () {
                             geocodeAddress(geocoder, map, set);
-                        }, 2000);
+                        }, 2000); //Preventing Over_Query_Limit
                     } else {
                         alert('Geocode was not successful for the following reason: ' + status);
                     }
@@ -70,6 +72,7 @@ export default class Map extends Component {
             });
        }
 
+       //Inserting markers with a delay of 3 s each set
        (function delayingInsert(i) {
            setTimeout(function () {
                addMarker(i*10);
@@ -81,7 +84,7 @@ export default class Map extends Component {
 
     getAddress(){
         let addressArr = [];
-
+        //fetching stores
         fetch(Global.JSON_FILE)
         .then(results => results.json())
         .then(stores => stores.map(current =>
