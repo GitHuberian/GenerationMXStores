@@ -19,8 +19,8 @@ open http://localhost:3000
 
 ### User Stories solved in this project
 
-* GenerationMXStores App is the result after reading intro and next steps on localhost:3000 on the first run of the boilerplate provided by Generation
-* GenerationMXStores App was embeded in `src/YourComponent.js` 
+* GenerationMXStores App:octocat: is the result after reading intro and next steps on localhost:3000 on the first run of the boilerplate provided by Generation
+* GenerationMXStores App:octocat: was embeded in `src/YourComponent.js` 
 
 **User Stories**:
 - [x]  As a student, I want to see a map of Mexico City
