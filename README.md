@@ -1,39 +1,14 @@
 Generation Take-Home Coding Challenge
 =================================
-This is a take-home coding challenge used to help evaluate candidates
-interested in joining the team at Generation.
-The goal is for candidates to complete the coding challenge before the
-in-person interview so that we can discuss the solution together.
-In cases where this is not possible, we may discuss the solution together
-over a followup phone call.
+This is the repository for the take-home coding challenge.
 
-### What should you expect?
+### App Capture
 
-We expect that the exercise will take anywhere from 2-5 hours to complete
-depending on your familiarity with React and with the GoogleMaps API.
+![APP capture](https://github.com/GitHuberian/GenerationMXStores/genmxss1)
 
-We understand that this is a significant amount of time so we really appreciate
-the effort you put into it. 
+### Running App
 
-### How should you submit your code?
-
-Any way you want - email us a link to your personal repo, a link with the application running on a server, etc.
-Please include a couple screenshots of the app.
-
-### What if I don't know React? 
-
-Feel free to submit a solution that meets the requirements, but without using React.
-React is an important part of our stack and you'll be using it every day so it's important
-that you're excited to learn it! If you don't know React and you're able to learn the basics
-in order to complete the exercise, we'll be impressed :)
-
-<a href="https://tylermcginnis.com/react-js-tutorial-pt-1-a-comprehensive-guide-to-building-apps-with-react-js-8ce321b125ba#.h5n3iisi4">Here's a great React tutorial</a>
-
-<a href="http://courses.reactjsprogram.com/courses/reactjsfundamentals">This one is also great.</a>
-
-### How do you start?
-
-Clone the repo on your computer
+Clone the repo
 
 Run
 ```
@@ -41,19 +16,18 @@ npm install
 npm start
 open http://localhost:3000
 ```
-Read the intro and next steps on localhost:3000
-Edit `src/YourComponent.js`.  
-Your changes will appear without reloading the browser like in [this video](http://vimeo.com/100010922).
 
-### What do we look for?
+### User Stories solved in this project
 
-* **Correctness**: does the application do what was asked (e.g., all the user stories are complete)? If there is anything missing, does the README explain why it is missing?
-* **Code quality**: is the code simple, easy to understand, and maintainable?  Are there any code smells or other red flags? Is the coding style consistent with the language's guidelines? Is it consistent throughout the codebase?
-* **Testing**: Are there some unit and some integration tests?
-	* We're not looking for full coverage (given time constraint) but just trying to get a feel for your testing skills.
-* **UX**:  Is the web interface understandable and pleasing to use? Is it responsive to various screen sizes, and fast to load?
-* **Technical choices**: do choices of libraries, databases, architecture etc. seem appropriate for the chosen application?
+GenerationMXStores App is the result after reading intro and next steps on localhost:3000 on the first run of the boilerplate provided by Generation
+GenerationMXStores App was embeded in `src/YourComponent.js` 
 
-### Source
+**User Stories**:
+* As a student, I want to see a map of Mexico City
+* As a student, I want to see a map that has all the stores represented as markers/pins on the map
+* As a student, I want to be able to click on a store and add it to a list of 'My Favorite Stores'
 
+### Boilerplate source
+
+Generation boilerplate (https://github.com/digital-generation/generation-take-home)
 This boilerplate project is a mirror plus a few additions from gaearon's react boilerplate (https://github.com/gaearon/react-hot-boilerplate)
