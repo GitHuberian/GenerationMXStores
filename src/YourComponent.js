@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Toolbar from './Toolbar/Toolbar';
 import StoredLocations from './StoredLocations/StoredLocations';
 import FavoriteStore from './Models/FavoriteStore';
+import Global from './Globals/Global';
 import Map from './Map/Map';
 /*
 * Use this component as a launching-pad to build your functionality.
@@ -13,27 +14,28 @@ export default class YourComponent extends Component {
     super(props);
     this.state = {
       activeList: false,
-      store:[],
-      favObject:{}
+      stores:[],
+      favObject:{},
+      favorite:'',
     }
     this.openList = this.openList.bind(this);
   }
 
-  openList = (active) =>{
+  openList = (active, favorite) =>{
     this.setState({
-      activeList: active
-    })
+      activeList: active,
+      favorite: favorite
+    });
   }
 
   storedLocation = (favorites) =>{
-    const { store } = { ...this.state };
-    const currentState = store;
+    const { stores } = { ...this.state };
+    const currentState = stores;
     currentState.push(favorites);
 
     this.setState({ 
-      store: currentState 
+      stores: currentState 
     });
-    
   }
 
   componentWillMount(){
@@ -41,7 +43,7 @@ export default class YourComponent extends Component {
     Favs.readStorage();
     this.setState({
       favObject:Favs,
-      store: Favs.favorite
+      stores: [...new Set(Favs.favorite)]
     });
   }
 
@@ -52,8 +54,8 @@ export default class YourComponent extends Component {
       <p>Show me the map, please!</p>
       <div className='main'>
         <Toolbar openList={this.openList} active={this.state.activeList}></Toolbar>
-        <Map storedLocation={this.storedLocation} Favs={this.state.favObject}></Map>
-        <StoredLocations activeList={this.state.activeList} newFavorite={[...new Set(this.state.store)]}></StoredLocations>
+        <Map storedLocation={this.storedLocation} Favs={this.state.favObject} openList={this.openList} ></Map>
+        <StoredLocations activeList={this.state.activeList} newFavorite={this.state.stores} clicked={this.state.favorite} ></StoredLocations>
       </div>
       </div>
     );

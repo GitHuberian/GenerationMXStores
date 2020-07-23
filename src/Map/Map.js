@@ -16,9 +16,9 @@ export default class Map extends Component {
     }
 
     initMap() {
-        let geocoder = new window.google.maps.Geocoder();
+        let geocoder = new google.maps.Geocoder();
         let storesLenght = Math.floor(this.state.addressArr.length / 10);
-        const map = new window.google.maps.Map(document.getElementById("map"), {
+        const map = new google.maps.Map(document.getElementById("map"), {
             center: {
                 lat: 19.432608,
                 lng: -99.133209
@@ -26,16 +26,16 @@ export default class Map extends Component {
             zoom: 11,
             styles: Global.MAP_STYLES
         });
-
         this.geocodeAddress(geocoder, map, storesLenght);
     }
  
-    geocodeAddress(geocoder, map, storesLenght) {
+    geocodeAddress(geocoder, map, storesLenght){
 
        const addFav = (marker, name, address) => {
+           this.props.openList(true, name);
            marker.setIcon(Global.MARKER_IMG);
            marker.setAnimation(google.maps.Animation.BOUNCE);
-           window.setTimeout(function () {
+           setTimeout(function () {
                marker.setAnimation(null);
            }, 1000);
            if (!this.props.Favs.isStored(name)) {
@@ -50,7 +50,7 @@ export default class Map extends Component {
                     'address': current.Address
                 }, function (results, status) {
                     if (status == 'OK') {
-                        let marker = new window.google.maps.Marker({
+                        let marker = new google.maps.Marker({
                             position: results[0].geometry.location,
                             map: map,
                             title: current.Name,
@@ -61,7 +61,6 @@ export default class Map extends Component {
                         });
                     } else if (status === 'OVER_QUERY_LIMIT') {
                         setTimeout(function () {
-                            console.log('Over query limit')
                             geocodeAddress(geocoder, map, set);
                         }, 2000);
                     } else {
